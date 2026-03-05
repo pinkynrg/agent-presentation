@@ -1,3 +1,5 @@
+import sdkImage from '../assets/sdk.png'
+
 export default function VirtualDesktop({ stagingContent, textAreaContent, maxHeight }) {
   return (
     <div style={{
@@ -7,7 +9,7 @@ export default function VirtualDesktop({ stagingContent, textAreaContent, maxHei
       aspectRatio: '1190 / 995',
       width: '100%',
       maxHeight: maxHeight || 'none',
-      backgroundImage: 'url(/assets/sdk.png)',
+      backgroundImage: `url(${sdkImage})`,
       backgroundSize: '100% 100%',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
