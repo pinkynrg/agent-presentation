@@ -470,25 +470,106 @@ On the other hand **LLM doesn't know Beefree custom JSON format** or our specifi
 
 ---
 
-# The Plan Structure
+<h1 style="margin-bottom: 0.5rem !important;">Before & After</h1>
 
-```
-Color palette, fonts, margins (tokens)
-  ↓
-Global Styles (email body width, padding, margins, background)
-  ↓
-Email Metadata (subject, preheader)
-  ↓
-Rows (hero, features, footer...)
-  ↓
-Columns (how many columns in each row? 1, 2, 3...)
-  ↓
-Blocks (what type of content goes in each column? text, image, button...)
-```
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
 
-<div class="mt-4 text-base opacity-80">
+const step = ref(0)
+let interval = null
 
-Token-based design system ensures consistency. Hierarchical structure makes it predictable.
+onMounted(() => {
+  interval = setInterval(() => {
+    step.value = (step.value + 1) % 4
+  }, 2500)
+})
+
+onUnmounted(() => {
+  if (interval) clearInterval(interval)
+})
+</script>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0rem;">
+
+<div>
+<h2 style="text-align: center; color: #ff4444; margin-bottom: 0.2rem !important; font-size: 0.95rem;">❌ Before: Direct Tool Calls</h2>
+
+<div style="background: #fff5f5; padding: 1rem; border-radius: 12px; border: 2px solid #ffcccc;">
+
+<div style="font-size: 0.7rem;">
+
+<div style="background: #e8f5e9; padding: 0.5rem; border-radius: 8px; margin-bottom: 0.4rem;">
+<strong>User:</strong> "Create 3-section email"
+</div>
+
+<div style="font-weight: bold; margin-bottom: 0.3rem; font-size: 0.75rem;">Agent calls:</div>
+<div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.5rem;">
+<div :style="{ opacity: step >= 1 ? 1 : 0.3, transition: 'opacity 0.4s' }">
+<code style="background: #f8f6ff; padding: 0.3rem 0.5rem; border-radius: 4px; font-size: 0.65rem; display: block;">add_section(color: "#0000ff")</code>
+</div>
+<div :style="{ opacity: step >= 2 ? 1 : 0.3, transition: 'opacity 0.4s' }">
+<code style="background: #f8f6ff; padding: 0.3rem 0.5rem; border-radius: 4px; font-size: 0.65rem; display: block;">add_section(color: "#ff0000")</code>
+</div>
+<div :style="{ opacity: step >= 3 ? 1 : 0.3, transition: 'opacity 0.4s' }">
+<code style="background: #f8f6ff; padding: 0.3rem 0.5rem; border-radius: 4px; font-size: 0.65rem; display: block;">add_section(color: "#0000ff")</code>
+</div>
+</div>
+
+<div style="font-weight: bold; margin-bottom: 0.3rem; font-size: 0.75rem;">Result:</div>
+<div style="display: flex; flex-direction: column; gap: 0.4rem;">
+<div v-if="step >= 1" :style="{ background: '#0000ff', height: '30px', borderRadius: '6px', opacity: step >= 1 ? 1 : 0, transition: 'opacity 0.5s' }"></div>
+<div v-if="step >= 2" :style="{ background: '#ff0000', height: '30px', borderRadius: '6px', opacity: step >= 2 ? 1 : 0, transition: 'opacity 0.5s' }"></div>
+<div v-if="step >= 3" :style="{ background: '#0000ff', height: '30px', borderRadius: '6px', opacity: step >= 3 ? 1 : 0, transition: 'opacity 0.5s' }"></div>
+</div>
+
+<div v-if="step === 3" style="margin-top: 0.5rem; color: #ff4444; font-weight: bold; font-size: 0.75rem; text-align: center;">
+⚠️ Inconsistent!
+</div>
+
+</div>
+
+</div>
+</div>
+
+<div>
+<h2 style="text-align: center; color: #22bb33; margin-bottom: 0.2rem !important; font-size: 0.95rem;">✅ After: Plan → Execute</h2>
+
+<div style="background: #f0fff4; padding: 1rem; border-radius: 12px; border: 2px solid #bbf7d0;">
+
+<div style="font-size: 0.7rem;">
+
+<div style="background: #e8f5e9; padding: 0.5rem; border-radius: 8px; margin-bottom: 0.4rem;">
+<strong>User:</strong> "Create 3-section email"
+</div>
+
+<div :style="{ opacity: step >= 1 ? 1 : 0.3, transition: 'opacity 0.4s', marginBottom: '0.5rem' }">
+<div style="font-weight: bold; margin-bottom: 0.2rem; font-size: 0.7rem;">1. Planner generates JSON:</div>
+<pre style="background: #f8f6ff; padding: 0.5rem; border-radius: 6px; font-size: 0.6rem; margin: 0; overflow: hidden; line-height: 1.3;">{ 
+  "palette": { "primary": "#0000ff" },
+  "sections": [
+    { "color": "primary" },
+    { "color": "primary" },
+    { "color": "primary" }
+  ]
+}</pre>
+</div>
+
+<div v-if="step >= 2" style="font-weight: bold; margin-bottom: 0.3rem; font-size: 0.75rem;">2. Executor runs it → Result:</div>
+
+<div v-if="step >= 2" style="display: flex; flex-direction: column; gap: 0.4rem;">
+<div :style="{ background: '#0000ff', height: '30px', borderRadius: '6px', opacity: step >= 2 ? 1 : 0, transition: 'opacity 0.5s' }"></div>
+<div :style="{ background: '#0000ff', height: '30px', borderRadius: '6px', opacity: step >= 3 ? 1 : 0, transition: 'opacity 0.5s' }"></div>
+<div v-if="step === 3" :style="{ background: '#0000ff', height: '30px', borderRadius: '6px', opacity: 1, transition: 'opacity 0.5s' }"></div>
+</div>
+
+<div v-if="step === 3" style="margin-top: 0.5rem; color: #22bb33; font-weight: bold; font-size: 0.75rem; text-align: center;">
+✓ Consistent by design!
+</div>
+
+</div>
+
+</div>
+</div>
 
 </div>
 
