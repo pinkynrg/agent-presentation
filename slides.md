@@ -107,22 +107,80 @@ They've seen them millions of times. On the other hand it doesn't know **Beefree
 > "Beefree's JSON is harder to work with — but it's **why emails render correctly everywhere**."
 
 ---
+layout: center
+class: text-center
+---
+
+# Demo
+
+---
 layout: default
 class: '!p-0 no-watermark'
 ---
 
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 0;">
-  <div style="overflow: hidden; border: 1px solid #000000; border-top: none; border-left: none;">
-    <iframe src="https://beefree.io/app/index.html" style="width: 200%; height: 200%; border: none; transform: scale(0.5); transform-origin: 0 0;"></iframe>
-  </div>
-  <div style="overflow: hidden; border: 1px solid #000000; border-top: none; border-right: none;">
-    <iframe src="https://beefree.io/app/index.html" style="width: 200%; height: 200%; border: none; transform: scale(0.5); transform-origin: 0 0;"></iframe>
-  </div>
-  <div style="overflow: hidden; border: 1px solid #000000; border-bottom: none; border-left: none;">
-    <iframe src="https://beefree.io/app/index.html" style="width: 200%; height: 200%; border: none; transform: scale(0.5); transform-origin: 0 0;"></iframe>
-  </div>
-  <div style="overflow: hidden; border: 1px solid #000000; border-bottom: none; border-right: none;">
-    <iframe src="https://beefree.io/app/index.html" style="width: 200%; height: 200%; border: none; transform: scale(0.5); transform-origin: 0 0;"></iframe>
+<script setup>
+import { ref } from 'vue'
+
+const zoomedIframe = ref(null)
+const hoveredButton = ref(null)
+
+const toggleZoom = (index) => {
+  zoomedIframe.value = zoomedIframe.value === index ? null : index
+}
+</script>
+
+<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000000; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; padding: 10px; box-sizing: border-box;">
+  <div 
+    v-for="i in 4" 
+    :key="i" 
+    :style="{
+      overflow: 'hidden',
+      border: '1px solid #e0e0e0',
+      borderRadius: '4px',
+      position: 'relative',
+      display: zoomedIframe !== null && zoomedIframe !== i ? 'none' : 'block',
+      gridColumn: zoomedIframe === i ? '1 / 3' : 'auto',
+      gridRow: zoomedIframe === i ? '1 / 3' : 'auto'
+    }"
+  >
+    <iframe 
+      src="https://beefree.io/app/index.html" 
+      :style="{
+        width: zoomedIframe === i ? '180%' : '200%',
+        height: zoomedIframe === i ? '180%' : '200%',
+        border: 'none',
+        transform: zoomedIframe === i ? 'scale(0.56)' : 'scale(0.5)',
+        transformOrigin: '0 0'
+      }"
+    ></iframe>
+    <button
+      @click="toggleZoom(i)"
+      @mouseenter="hoveredButton = i"
+      @mouseleave="hoveredButton = null"
+      :style="{
+        position: 'absolute',
+        bottom: '5px',
+        right: '5px',
+        width: '20px',
+        height: '20px',
+        background: 'rgba(0, 0, 0, 0.7)',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '10px',
+        color: 'white',
+        transition: 'all 0.3s ease',
+        zIndex: 1000,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+        opacity: hoveredButton === i ? '1' : '0.15'
+      }"
+      :title="zoomedIframe === i ? 'Exit fullscreen' : 'Fullscreen'"
+    >
+      {{ zoomedIframe === i ? '✕' : '⛶' }}
+    </button>
   </div>
 </div>
 
@@ -172,3 +230,13 @@ Questions?
 </div>
 
 ---
+
+<!-- Write a travel inspiration email in Airbnb's style. Tone: warm, human, wanderlust-driven. Structure: full-bleed destination hero → friendly headline about belonging anywhere → two-sentence intro → three-column destination cards each with a photo, location name, and starting price → host spotlight split-screen with photo and short quote → CTA: 'Start Exploring.' Warm coral and white palette. -->
+
+
+<!-- Write a premiere email for a new dark thriller series in Netflix's style. Tone: cinematic, mysterious. Structure: full-bleed key art hero with title treatment overlay → release date in red → two-line series logline → three-column episode preview strip with stills and one-line teasers → cast spotlight split-screen → CTA: 'Watch Now.' Black background, Netflix red accents only. -->
+
+<!-- Write a feature announcement email in Spotify's style. Tone: friendly, energetic, slightly playful. Structure: colorful gradient hero with feature name large → two-sentence explanation of what's new → three-column icon triptych showing how it works step by step → animated GIF of the feature in the app → user testimonial pull quote → CTA: 'Try It Now.' Spotify green on dark background. -->
+
+
+<!-- Write a launch email for a new iPhone in Apple's style. Tone: quiet confidence, zero hype. Structure: full-bleed product hero on white → five-word headline → two-sentence intro → alternating split-screen sections for three key features, each with a close-up shot and one paragraph → specs comparison table against previous model → primary CTA: 'Order Now'. Pure white background, SF Pro typography implied, single grey accent. -->
