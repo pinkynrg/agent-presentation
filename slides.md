@@ -27,7 +27,7 @@ Amplifying creativity inside Beefree/RGE Studio
 
 <div>
 
-From **Stensul** to **Knak**, from **Mailchimp** to **ActiveCampaign**,  
+From **Stensul** to **Knak**, from **Stripo** to **ActiveCampaign**,  
 the message is the same: *"Give us a prompt. We'll generate your campaign."*
 
 - Full emails
