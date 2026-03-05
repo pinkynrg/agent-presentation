@@ -264,8 +264,8 @@ On the other hand **LLMs don't know Beefree custom JSON format** or our specific
 </div>
 
 ---
-
-<h1 style="margin-bottom: 0.5rem !important;">Before & After</h1>
+class: '!p-4 no-watermark'
+---
 
 <React is="BeforeAfter" />
 
@@ -315,7 +315,7 @@ Some of the next steps we are excited about:
 - **Personalized context**  
   Smart copy suggestions and learning from your patterns: styles, templates, and workflows you use most.
 
-- **Hackaton: Fine-tuning open source LLM on our toolset**  
+- **Hackaton: Fine-tuning open source LLM on our toolset (to explore during cool-downs)**  
   Instead of teaching the LLM our JSON through prompts, train it to speak our MCP tools natively.
 
 ---

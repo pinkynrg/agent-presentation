@@ -1,4 +1,14 @@
 export default function Capabilities() {
+  const shimmerKeyframes = `
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+  `
   const cardBase = {
     padding: '1.2rem',
     borderRadius: '12px',
@@ -23,7 +33,7 @@ export default function Capabilities() {
   const titleStyle = {
     textAlign: 'center',
     color: '#7747ff',
-    marginBottom: '0rem',
+    margin: '0 0 0 0',
     fontSize: '1.1rem',
   }
 
@@ -106,9 +116,37 @@ export default function Capabilities() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        overflow: 'hidden',
       }}>
-        <div style={{ fontSize: '2.5rem', color: '#7747ff', opacity: 0.4, marginBottom: '0.5rem' }}>...</div>
-        <div style={{ color: '#7747ff', opacity: 0.6, fontStyle: 'italic', textAlign: 'center', fontSize: '0.85rem' }}>
+        <style dangerouslySetInnerHTML={{ __html: shimmerKeyframes }} />
+        {/* Rainbow loader dots */}
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+          {['#7747ff', '#ff6b6b', '#ffa726', '#66bb6a', '#42a5f5'].map((color, i) => (
+            <div
+              key={i}
+              style={{
+                width: '10px',
+                height: '10px',
+                borderRadius: '50%',
+                background: color,
+                animation: `pulse-dot 1.4s ease-in-out ${i * 0.2}s infinite`,
+              }}
+            />
+          ))}
+        </div>
+        {/* Shimmer text */}
+        <div style={{
+          fontStyle: 'italic',
+          textAlign: 'center',
+          fontSize: '0.85rem',
+          fontWeight: 600,
+          background: 'linear-gradient(90deg, #7747ff, #ff6b6b, #ffa726, #66bb6a, #42a5f5, #7747ff)',
+          backgroundSize: '200% auto',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          animation: 'shimmer 3s linear infinite',
+        }}>
           More cycles<br />to come
         </div>
       </div>
