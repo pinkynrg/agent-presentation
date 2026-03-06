@@ -89,49 +89,58 @@ export default function AgentVsToolsAnimated() {
       {/* Result column - SDK editor */}
       <div>
         <div style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '1rem' }}>📧</div>
-        <h3 style={{ textAlign: 'center', color: '#7747ff', marginBottom: '1rem', fontSize: '1.1rem' }}>Result</h3>
+        <h3 style={{ textAlign: 'center', color: '#7747ff', marginBottom: '1rem', fontSize: '1.1rem' }}>Result in SDK Editor</h3>
         <VirtualDesktop
           stagingContent={
             step >= 1 && (
               <div style={{
-                border: '2px dashed rgba(119, 71, 255, 0.6)',
-                borderRadius: '4px',
-                padding: '0.4rem',
-                background: 'rgba(255,255,255,0.85)',
+                background: '#7747ff',
+                padding: '0',
                 opacity: step >= 1 ? 1 : 0,
                 transition: 'opacity 0.5s ease',
               }}>
-                <div style={{ fontSize: '0.5rem', color: '#7747ff', fontWeight: 'bold', marginBottom: '0.25rem' }}>
-                  Section (1 col)
+                {/* White body area */}
+                <div style={{
+                  background: 'white',
+                  margin: '0 auto',
+                  width: '65%',
+                  padding: '0.4rem 0.3rem',
+                  minHeight: '50px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.25rem',
+                }}>
+                  {step >= 2 && (
+                    <div style={{
+                      background: '#e0e0e0',
+                      borderRadius: '3px',
+                      height: '45px',
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#999',
+                      fontSize: '0.5rem',
+                      opacity: step >= 2 ? 1 : 0,
+                      transition: 'opacity 0.5s ease',
+                    }}>🖼️ hero.jpg</div>
+                  )}
+                  {step >= 3 && (
+                    <div style={{
+                      background: '#7747ff',
+                      color: 'white',
+                      borderRadius: '3px',
+                      padding: '0.25rem 0.5rem',
+                      textAlign: 'center',
+                      fontSize: '0.55rem',
+                      fontWeight: 'bold',
+                      opacity: step >= 3 ? 1 : 0,
+                      transition: 'opacity 0.5s ease',
+                    }}>Shop Now</div>
+                  )}
                 </div>
-                {step >= 2 && (
-                  <div style={{
-                    background: '#e0e0e0',
-                    borderRadius: '3px',
-                    height: '45px',
-                    marginBottom: '0.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#999',
-                    fontSize: '0.5rem',
-                    opacity: step >= 2 ? 1 : 0,
-                    transition: 'opacity 0.5s ease',
-                  }}>🖼️ hero.jpg</div>
-                )}
-                {step >= 3 && (
-                  <div style={{
-                    background: '#7747ff',
-                    color: 'white',
-                    borderRadius: '3px',
-                    padding: '0.25rem 0.5rem',
-                    textAlign: 'center',
-                    fontSize: '0.55rem',
-                    fontWeight: 'bold',
-                    opacity: step >= 3 ? 1 : 0,
-                    transition: 'opacity 0.5s ease',
-                  }}>Shop Now</div>
-                )}
               </div>
             )
           }
