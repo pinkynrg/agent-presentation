@@ -196,11 +196,6 @@ layout: center
 2. **Probabilistic execution**: Just because you ask for something in a prompt doesn't guarantee it happens 100% of the time. LLMs are non-deterministic by nature.
 3. **Prompt engineering**: Every line you add to the system prompt competes with every line already there. By adding you dilute.
 4. **Evaluating correctness**: You can't unit test an agent. Knowing if it's doing a good job is non-trivial.
-5. **LLMs know HTML, CSS, Python, React** and other common languages fluently. 
-On the other hand **LLMs don't know Beefree custom JSON format** or our specific **MCP toolset**.
-
-
-> Our email JSON format is harder to work with but it's **why our emails render correctly on many email clients**.
 
 ---
 
@@ -295,6 +290,9 @@ graph LR
 
 4. **More complexity? More agents, smaller scope.**  
    Don't give one LLM a bigger prompt. Split the work across specialized agents that each do one thing well.
+
+5. **Email client compatibility vs LLM fluency:**  
+   Some tools (like Migma.ai) generate emails using JavaScript, a language well known by LLMs. That's why their initial outputs can look impressive. We use a custom format that's harder for LLMs to understand, but it's the foundation of our cross-client rendering reliability. As we refine our approach, we'll get better results while maintaining that compatibility.
 
 
 
