@@ -321,7 +321,7 @@ class: '!p-0 no-watermark'
 # What's Next
 
 - **Parallelizing the planner**  
-  Get faster and more precise with `planning orchestrator` + `N parallel section planners`.
+  Get faster and more precise with planning orchestrator + N parallel section planners.
 
 - **UX refinements**  
   Better feedback loops: revert SDK actions and smoother editing experience.
