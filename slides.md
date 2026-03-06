@@ -130,8 +130,8 @@ layout: center
 
 <div>
 
-<h1 style="font-size: 2.5rem; line-height: 1.3;">We are not automating creativity.</h1>
-<h1 style="font-size: 2.5rem; line-height: 1.3; margin-top: 1rem;">We are <span style="color: #7747ff;">amplifying</span> it.</h1>
+<h1 style="font-size: 2.5rem; line-height: 1.3; color: #1a1a1a !important;">We are not automating creativity.</h1>
+<h1 style="font-size: 2.5rem; line-height: 1.3; margin-top: 1rem; color: #1a1a1a !important;">We are <span style="color: #7747ff !important;">amplifying</span> it.</h1>
 
 <p style="margin-top: 2rem; font-size: 0.9rem;">
 <a href="https://growens.atlassian.net/wiki/spaces/BEEPro/pages/6270877697/Beefree+App+-+AI+Co-Pilot+-+Beta+version" target="_blank" style="color: #7747ff; text-decoration: none; border-bottom: 1px solid #7747ff;">Beefree AI Co-Pilot internal docs</a>
@@ -172,13 +172,13 @@ layout: center
 
 ---
 
-# Agent vs Tools
+# Agent vs Tools: The Concept
 
 <React is="AgentVsToolsStatic" />
 
 ---
 
-# Agent vs Tools
+# Agent vs Tools: In Action
 
 <React is="AgentVsToolsAnimated" />
 
@@ -192,10 +192,13 @@ layout: center
 
 # The challenges we faced
 
-1. **Consistency**: Tools get called correctly, but not consistently. <br/>Use blue in row 1, red in row 2, blue again in row 3.
-2. **Probabilistic execution**: Just because you ask for something in a prompt doesn't guarantee it happens 100% of the time. LLMs are non-deterministic by nature.
-3. **Prompt engineering**: Every line you add to the system prompt competes with every line already there. By adding you dilute.
-4. **Evaluating correctness**: You can't unit test an agent. Knowing if it's doing a good job is non-trivial.
+1. **Lack of consistency**: Tools get called correctly, but not consistently. <br/>
+Use blue in row 1, red in row 2, blue again in row 3.
+2. **Non-determinism**: No guarantee the LLM does what you ask 100% of the time. <br/>
+LLMs are non-deterministic by nature.
+3. **System Prompt dilution**: Every line you add to the system prompt competes with every line already there. By adding, you dilute.
+4. **Evaluating correctness**: You can't test an agent in the usual way. <br/>
+Knowing if it's doing a good job is non-trivial.
 
 ---
 
@@ -279,21 +282,17 @@ graph LR
 
 # Lessons Learned
 
-1. **A structured plan is likely one key to good results.**  
+1. A **plan guideline helps** bring better results.  <br/>
    A tight output schema changes everything.
 
-2. **Adding lines to the system prompt is overrated.**  
-   Every new instruction competes with the rest. More words, less focus.
+2. Descriptive system **prompts are overrated.**  <br/>
+   Prefer structured output and let the LLM do what it does best: fill in the blanks.
 
-3. **Less AI is sometimes the right call!**  
+3. **Less AI** is sometimes the right call!  <br/>
    Deterministic beats autonomous when you need reliability.
 
-4. **More complexity? More agents, smaller scope.**  
+4. **More complexity → more agents** <br/>
    Don't give one LLM a bigger prompt. Split the work across specialized agents that each do one thing well.
-
-5. **Email client compatibility vs LLM fluency:**  
-   Some tools (like Migma.ai) generate emails using JavaScript, a language well known by LLMs. That's why their initial outputs can look impressive. We use a custom format that's harder for LLMs to understand, but it's the foundation of our cross-client rendering reliability. As we refine our approach, we'll get better results while maintaining that compatibility.
-
 
 
 ---
@@ -321,11 +320,11 @@ class: '!p-0 no-watermark'
 - **Parallelizing the planner**  
   Get faster and more precise with planning orchestrator + N parallel section planners.
 
-- **UX refinements**  
-  Better feedback loops: revert SDK actions and smoother editing experience.
-
 - **Personalized context**  
   Learning from customer's styles and templates.
+
+- **Headless MCP integration**  
+  Integrate MCP headless so the agent will be able to work without the SDK opened. 
 
 - **Hackaton: Fine-tuning open source LLM on our toolset (to explore during cool-downs)**  
   Instead of teaching the LLM our JSON through prompts, train it to speak our MCP tools natively.
