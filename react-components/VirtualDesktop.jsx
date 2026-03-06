@@ -21,7 +21,7 @@ export default function VirtualDesktop({ stagingContent, textAreaContent, maxHei
           top: '7%',
           left: '0%',
           width: '65%',
-          height: '55%',
+          height: '85%',
           display: 'flex',
           flexDirection: 'column',
           gap: '0.3rem',
