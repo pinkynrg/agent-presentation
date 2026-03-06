@@ -248,12 +248,12 @@ config:
     edgeLabelBackground: '#fcf9ff'
 ---
 graph LR
-    U([User Request]) --> A[Guardrail]
-    A -->|email design related| B[Router]
+    U([User Request]) --> A["Guardrail Agent<br/><small>gpt-5-nano</small>"]
+    A -->|email design related| B["Router Agent<br/><small>gpt-5.2</small>"]
     A -->|not email design related| Z([Output: Not Related])
-    B -->|Edit| C[Editor]
-    B -->|Create| D[Prompt Enhancer]
-      D --> E[Planner]
+    B -->|Edit| C["Editor Agent<br/><small>gpt-5-nano</small>"]
+    B -->|Create| D["Prompt Enhancer Agent<br/><small>gpt-5-nano</small>"]
+      D --> E["Planner Agent<br/><small>gpt-5.2</small>"]
     subgraph What we just saw
       E --> F((Executor))
     end
