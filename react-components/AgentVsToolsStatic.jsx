@@ -31,33 +31,38 @@ export default function AgentVsToolsStatic() {
         {/* Single speech bubble containing all tools */}
         <div style={{ 
           position: 'relative',
-          background: '#fff',
+          background: step === 1 ? '#fff' : 'transparent',
           padding: '0.8rem',
           borderRadius: '12px',
-          border: '2px solid #FFE4CC',
-          boxShadow: '0 2px 8px rgba(255, 159, 90, 0.15)',
+          border: step === 1 ? '2px solid #FFE4CC' : '2px solid transparent',
+          boxShadow: step === 1 ? '0 2px 8px rgba(255, 159, 90, 0.15)' : 'none',
+          transition: 'all 0.4s ease',
         }}>
           {/* Speech bubble pointer at top right */}
-          <div style={{
-            position: 'absolute',
-            right: '-10px',
-            top: '15px',
-            width: 0,
-            height: 0,
-            borderTop: '10px solid transparent',
-            borderBottom: '10px solid transparent',
-            borderLeft: '10px solid #FFE4CC',
-          }}></div>
-          <div style={{
-            position: 'absolute',
-            right: '-8px',
-            top: '15px',
-            width: 0,
-            height: 0,
-            borderTop: '9px solid transparent',
-            borderBottom: '9px solid transparent',
-            borderLeft: '9px solid #fff',
-          }}></div>
+          {step === 1 && (
+            <>
+              <div style={{
+                position: 'absolute',
+                right: '-10px',
+                top: '15px',
+                width: 0,
+                height: 0,
+                borderTop: '10px solid transparent',
+                borderBottom: '10px solid transparent',
+                borderLeft: '10px solid #FFE4CC',
+              }}></div>
+              <div style={{
+                position: 'absolute',
+                right: '-8px',
+                top: '15px',
+                width: 0,
+                height: 0,
+                borderTop: '9px solid transparent',
+                borderBottom: '9px solid transparent',
+                borderLeft: '9px solid #fff',
+              }}></div>
+            </>
+          )}
           
           <div style={colStyle}>
             <div style={{ 
@@ -108,10 +113,7 @@ export default function AgentVsToolsStatic() {
           textAlign: 'center', 
           fontSize: '0.9rem', 
           lineHeight: 1.8, 
-          padding: '1rem',
-          borderRadius: '8px',
-          background: step === 1 ? '#E8DEFF' : 'transparent',
-          transition: 'background 0.4s ease',
+          padding: '0 1rem',
         }}>
           A collection of tools with labels describing what each tool should be used for
         </div>
@@ -136,7 +138,7 @@ export default function AgentVsToolsStatic() {
               transition: 'opacity 0.4s ease',
               fontWeight: step === 1 ? 'bold' : 'normal',
             }}>
-              <strong>Step 1:</strong> Reads tools description from MCP
+              <strong>Step 1:</strong> Requests MCP tool descriptions
             </div>
             <div style={{ 
               opacity: step >= 2 ? 1 : 0.3,
